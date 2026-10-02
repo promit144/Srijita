@@ -1,145 +1,433 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#2b102d" />
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
+
+  <meta name="theme-color" content="#2b102d">
+
   <title>For Srijita ♡</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <div class="music-pill" id="musicPill" aria-label="Music control">
-    <button id="musicBtn" aria-label="Play music">♫</button>
+
+  <!-- MUSIC -->
+  <div class="music-pill" id="musicPill">
+
+    <button id="musicBtn">
+      ♫
+    </button>
+
     <div>
       <strong>Blue</strong>
       <span>tap for music</span>
     </div>
+
   </div>
-  <audio id="song" src="assets/blue.mp3" loop preload="auto"></audio>
+
+  <!-- IMPORTANT:
+       Put your song at:
+       assets/blue.mp3
+  -->
+
+  <audio
+    id="song"
+    src="assets/blue.mp3"
+    loop
+    preload="auto">
+  </audio>
+
 
   <main id="app">
-    <!-- 1. Opening -->
+
+
+    <!-- =========================================
+         SCREEN 1
+         ========================================= -->
+
     <section class="screen hero active">
+
       <div class="soft-orb"></div>
-      <p class="eyebrow">a little something, for you</p>
-      <div class="heart">♥</div>
-      <p class="hint">tap the heart</p>
-    </section>
 
-    <!-- 2. Birthday -->
-    <section class="screen birthday">
-      <div class="stars"></div>
-      <div class="birthday-card">
-        <p class="mini">today feels a little more special</p>
-        <h1>Happy<br>Birthday</h1>
-        <div class="name">Srijita!</div>
-        <div class="cat">🐱🌷</div>
-        <p class="tiny">someone very special was born today ♡</p>
+      <p class="eyebrow">
+        a little something, for you
+      </p>
+
+      <div class="heart" id="openingHeart">
+        ♥
       </div>
+
+      <p class="hint">
+        tap the heart
+      </p>
+
     </section>
 
-    <!-- 3. Letter -->
+
+
+    <!-- =========================================
+         SCREEN 2
+         ========================================= -->
+
+    <section class="screen birthday">
+
+      <div class="birthday-card">
+
+        <p class="mini">
+          today feels a little more special
+        </p>
+
+        <h1>
+          Happy<br>
+          Birthday
+        </h1>
+
+        <div class="name">
+          Srijita!
+        </div>
+
+        <div class="cat">
+          🐱🌷
+        </div>
+
+        <p class="tiny">
+          someone very special was born today ♡
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         SCREEN 3
+         ========================================= -->
+
     <section class="screen letter-screen">
-      <div class="stars"></div>
+
       <article class="letter">
-        <h2>Dear Srijita,</h2>
+
+        <h2>
+          Dear Srijita,
+        </h2>
+
         <p>
           I keep thinking about how lucky I got with you.
-          You have seen me at my worst and stayed anyway, and
-          I probably don't say thank you nearly enough for that. ♡
+          You have seen me at my worst and stayed anyway,
+          and I probably don't say thank you nearly enough
+          for that. ♡
         </p>
+
         <p>
-          This year, I hope life is gentle with you. I hope you
-          get the little things you've been wishing for, the
-          moments that make you smile without trying, and all
-          the happiness you deserve.
+          This year, I hope life is gentle with you.
+          I hope you get the little things you've been
+          wishing for, the moments that make you smile
+          without trying, and all the happiness you deserve.
         </p>
+
         <p>
-          Every year I try to find the perfect words and every
-          year I fall short, so here's the honest version:
-          <strong>you make my ordinary days feel worth remembering.</strong>
+          Every year I try to find the perfect words and
+          every year I fall short, so here's the honest
+          version:
+          <strong>
+            you make my ordinary days feel worth remembering.
+          </strong>
         </p>
-        <p class="closing">Happy birthday, my favourite person… 🎂</p>
-        <div class="signature">With all my love,<br><b>— Promit</b></div>
+
+        <p class="closing">
+          Happy birthday, my favourite person… 🎂
+        </p>
+
+        <div class="signature">
+          With all my love,<br>
+          <b>— Promit</b>
+        </div>
+
       </article>
+
     </section>
 
-    <!-- 4. Reasons -->
+
+
+    <!-- =========================================
+         SCREEN 4
+         ========================================= -->
+
     <section class="screen reasons-screen">
-      <div class="stars"></div>
+
       <div class="content">
-        <p class="eyebrow">a few little reasons ♡</p>
-        <h2>Why you're loved</h2>
-        <p class="sub">Pop every balloon. I have something to tell you.</p>
-        <div class="balloons" id="balloons">
-          <button class="balloon pink" data-text="You make ordinary days feel special"><span>♡</span></button>
-          <button class="balloon yellow" data-text="You believed in me when I didn't"><span>♡</span></button>
-          <button class="balloon purple" data-text="My worst days get shorter when you call"><span>♡</span></button>
-          <button class="balloon blue" data-text="Your laugh is still my favourite sound"><span>♡</span></button>
-          <button class="balloon peach" data-text="The world feels a little kinder with you in it"><span>♡</span></button>
+
+        <p class="eyebrow">
+          a few little reasons ♡
+        </p>
+
+        <h2>
+          Why you're loved
+        </h2>
+
+        <p class="sub">
+          Pop every balloon. I have something to tell you.
+        </p>
+
+
+        <div class="balloons">
+
+          <button
+            class="balloon pink"
+            data-text="You make ordinary days feel special">
+            <span>♡</span>
+          </button>
+
+          <button
+            class="balloon yellow"
+            data-text="You believed in me when I didn't">
+            <span>♡</span>
+          </button>
+
+          <button
+            class="balloon purple"
+            data-text="My worst days get shorter when you call">
+            <span>♡</span>
+          </button>
+
+          <button
+            class="balloon blue"
+            data-text="Your laugh is still my favourite sound">
+            <span>♡</span>
+          </button>
+
+          <button
+            class="balloon peach"
+            data-text="The world feels a little kinder with you in it">
+            <span>♡</span>
+          </button>
+
         </div>
-        <div id="reasonBox" class="reason-box hidden"></div>
-        <p id="reasonCount" class="count">5 little things waiting…</p>
+
+
+        <div
+          id="reasonBox"
+          class="reason-box hidden">
+        </div>
+
+
+        <p
+          id="reasonCount"
+          class="count">
+          5 little things waiting…
+        </p>
+
       </div>
+
     </section>
 
-    <!-- 5. Cake -->
+
+
+    <!-- =========================================
+         SCREEN 5
+         ========================================= -->
+
     <section class="screen cake-screen">
-      <div class="stars"></div>
+
       <div class="cake-wrap">
-        <p class="eyebrow">first things first 🎂</p>
-        <h2>Make a wish.</h2>
-        <p class="sub">Press the cake to light the candles.</p>
-        <button id="cake" class="cake" aria-label="Light the birthday cake">
-          <div class="flame f1"></div><div class="flame f2"></div><div class="flame f3"></div>
-          <div class="candle c1"></div><div class="candle c2"></div><div class="candle c3"></div>
-          <div class="icing"></div><div class="tier top"></div><div class="tier bottom"></div>
+
+        <p class="eyebrow">
+          first things first 🎂
+        </p>
+
+        <h2>
+          Make a wish.
+        </h2>
+
+        <p class="sub">
+          Press the cake to light the candles.
+        </p>
+
+
+        <button
+          id="cake"
+          class="cake"
+          aria-label="Light the birthday cake">
+
+          <div class="flame f1"></div>
+          <div class="flame f2"></div>
+          <div class="flame f3"></div>
+
+          <div class="candle c1"></div>
+          <div class="candle c2"></div>
+          <div class="candle c3"></div>
+
+          <div class="icing"></div>
+
+          <div class="tier top"></div>
+          <div class="tier bottom"></div>
+
         </button>
-        <p id="cakeMessage" class="cake-message">A wish this beautiful deserves to come true.</p>
+
+
+        <p
+          id="cakeMessage"
+          class="cake-message">
+
+          A wish this beautiful deserves to come true.
+
+        </p>
+
       </div>
+
     </section>
 
-    <!-- 6. Love tree -->
+
+
+    <!-- =========================================
+         SCREEN 6
+         ========================================= -->
+
     <section class="screen tree-screen">
-      <div class="warm-glow"></div>
+
       <div class="tree-wrap">
-        <p class="eyebrow">one more little thing</p>
-        <h2>A tree full of wishes</h2>
+
+        <p class="eyebrow">
+          one more little thing
+        </p>
+
+        <h2>
+          A tree full of wishes
+        </h2>
+
+
         <div class="tree">
-          <div class="trunk"></div>
-          <div class="crown">
-            <i>♥</i><i>♥</i><i>♥</i><i>♥</i><i>♥</i><i>♥</i><i>♥</i><i>♥</i>
-            <i>♥</i><i>♥</i><i>♥</i><i>♥</i><i>♥</i><i>♥</i><i>♥</i>
-          </div>
+          <svg class="tree-branches" viewBox="0 0 760 500" aria-hidden="true">
+            <g class="branch-lines">
+              <!-- main trunk -->
+              <path class="main-branch" d="M380 492 C378 420 380 350 380 285 C380 225 378 175 374 125" />
+
+              <!-- left main branches -->
+              <path d="M380 315 C340 280 292 246 238 218 C195 196 150 176 105 151" />
+              <path d="M380 350 C325 327 266 319 208 322 C160 324 116 312 76 286" />
+              <path d="M377 270 C335 232 302 187 286 137 C276 105 267 78 250 52" />
+              <path d="M376 220 C335 180 318 140 315 94 C313 72 309 52 302 34" />
+
+              <!-- right main branches -->
+              <path d="M380 310 C425 275 478 241 536 214 C586 191 638 169 690 130" />
+              <path d="M380 348 C436 326 498 318 558 324 C616 330 671 318 715 287" />
+              <path d="M383 267 C426 230 463 188 481 140 C492 111 501 82 522 52" />
+              <path d="M384 220 C427 181 457 139 466 94 C471 70 481 51 493 33" />
+
+              <!-- secondary branches -->
+              <path d="M315 246 C278 224 241 210 199 208 C168 207 142 197 121 180" />
+              <path d="M445 247 C487 224 522 213 560 210 C590 208 615 197 635 179" />
+              <path d="M292 185 C263 164 238 143 220 116 C205 95 194 75 187 55" />
+              <path d="M468 185 C500 161 529 142 558 119 C578 103 592 85 603 63" />
+              <path d="M272 305 C233 286 194 276 153 279 C123 281 98 272 79 257" />
+              <path d="M488 305 C529 285 570 277 612 280 C644 283 670 274 690 256" />
+            </g>
+          </svg>
+
+          <div class="tree-heart-field" aria-hidden="true"></div>
         </div>
-        <p class="tree-text">May this year bring you<br><b>more reasons to smile than you can count.</b></p>
+
+        <p class="tree-text">
+
+          May this year bring you<br>
+
+          <b>
+            more reasons to smile than you can count.
+          </b>
+
+        </p>
+
       </div>
+
     </section>
 
-    <!-- 7. Final -->
+
+
+    <!-- =========================================
+         SCREEN 7
+         ========================================= -->
+
     <section class="screen final-screen">
-      <div class="final-glow"></div>
+
       <div class="final-card">
-        <p class="eyebrow">and just like that…</p>
-        <h1>Happy Birthday,<br><em>Srijita</em> ♡</h1>
-        <p>27 looks beautiful on you.</p>
-        <div class="divider">✦</div>
-        <p class="big-line">Here's to another year of<br><b>you being you.</b></p>
-        <button id="replay">Replay from the beginning ↻</button>
+
+        <p class="eyebrow">
+          and just like that…
+        </p>
+
+
+        <h1>
+
+          Happy Birthday,<br>
+
+          <em>
+            Srijita
+          </em>
+
+          ♡
+
+        </h1>
+
+
+        <p>
+          27 looks beautiful on you.
+        </p>
+
+
+        <div class="divider">
+          ✦
+        </div>
+
+
+        <p class="big-line">
+
+          Here's to another year of<br>
+
+          <b>
+            you being you.
+          </b>
+
+        </p>
+
+
+        <button id="replay">
+
+          Replay from the beginning ↻
+
+        </button>
+
       </div>
+
+
       <div class="floating-hearts"></div>
+
     </section>
+
   </main>
 
-  <div class="nav">
-    <button id="prev" aria-label="Previous">←</button>
-    <div class="dots" id="dots"></div>
-    <button id="next" aria-label="Next">→</button>
-  </div>
+
+  <!--
+       Bottom navigation is intentionally hidden.
+       Navigation happens by tapping the screen.
+  -->
+
 
   <script src="script.js"></script>
+
 </body>
 </html>
