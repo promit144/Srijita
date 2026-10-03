@@ -1,0 +1,102 @@
+/* ===== birthday countdown lock (covers everything until the big moment) ===== */
+#lock{
+ position:fixed;inset:0;z-index:100;
+ display:flex;align-items:center;justify-content:center;
+ padding:28px 20px;text-align:center;overflow:hidden;color:#fff3e7;
+ background:radial-gradient(circle at 50% 35%,#55213f 0,#2b102d 52%,#18091b 100%);
+ transition:opacity 1.1s ease,transform 1.1s ease,visibility 0s linear 1.1s;
+}
+#lock.leaving{opacity:0;transform:scale(1.06);pointer-events:none;visibility:hidden}
+#lock.gone{display:none}
+
+/* soft glow behind the card */
+#lock::before{
+ content:"";position:absolute;left:50%;top:44%;width:560px;height:560px;max-width:140vw;max-height:140vw;
+ transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;
+ background:radial-gradient(circle,rgba(255,110,160,.30),rgba(255,160,120,.10) 45%,transparent 70%);
+ animation:lockAura 4s ease-in-out infinite;
+}
+@keyframes lockAura{50%{opacity:.55;transform:translate(-50%,-50%) scale(1.1)}}
+
+.lock-card{position:relative;z-index:2;width:min(560px,94vw)}
+
+.lock-gift{
+ display:block;font-size:64px;line-height:1;margin:0 0 14px;
+ filter:drop-shadow(0 10px 18px rgba(0,0,0,.35));
+ animation:lockGift 2.6s ease-in-out infinite;
+}
+@keyframes lockGift{
+ 0%,100%{transform:translateY(0) rotate(-3deg)}
+ 50%{transform:translateY(-9px) rotate(3deg) scale(1.05)}
+}
+
+.lock-eyebrow{
+ margin:0 0 10px;font-size:14px;font-style:italic;letter-spacing:.08em;color:#f2a4ba;
+}
+.lock-title{
+ margin:0;font-family:"Playfair Display",serif;font-weight:600;
+ font-size:clamp(32px,9vw,52px);line-height:1.1;color:#fff1e7;
+}
+.lock-title em{color:#f0a72c;font-style:italic}
+.lock-sub{margin:12px 0 28px;font-size:14px;color:#e5cbd9;line-height:1.6}
+
+.lock-clock{
+ display:flex;justify-content:center;gap:clamp(8px,2.6vw,16px);
+}
+.lock-unit{
+ flex:1;max-width:112px;padding:16px 4px 12px;border-radius:18px;
+ background:linear-gradient(160deg,rgba(255,255,255,.14),rgba(255,255,255,.04));
+ border:1px solid rgba(255,184,218,.28);
+ box-shadow:0 14px 34px rgba(0,0,0,.3),inset 0 0 22px rgba(255,255,255,.04);
+}
+.lock-num{
+ display:block;font-family:"Playfair Display",serif;font-weight:700;
+ font-size:clamp(32px,10vw,54px);line-height:1;color:#fff3e7;
+ font-variant-numeric:tabular-nums;
+}
+.lock-num.tick{animation:lockTick .45s ease}
+@keyframes lockTick{
+ 0%{transform:translateY(-8px);opacity:.2}
+ 100%{transform:none;opacity:1}
+}
+.lock-lbl{
+ display:block;margin-top:8px;font-size:10px;letter-spacing:.22em;
+ text-transform:uppercase;color:#f2a4ba;
+}
+
+.lock-date{
+ margin:26px 0 0;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+ color:rgba(255,255,255,.5);
+}
+
+/* the moment it is time */
+.lock-open{
+ display:none;margin-top:30px;padding:15px 30px;border-radius:999px;
+ background:linear-gradient(135deg,#ff5d91,#ec3270);color:#fff;
+ font-weight:600;font-size:16px;letter-spacing:.02em;
+ animation:lockBtn 2.2s ease-in-out infinite;
+}
+@keyframes lockBtn{
+ 50%{transform:scale(1.05);box-shadow:0 0 0 9px rgba(236,50,112,.16),0 10px 34px rgba(236,50,112,.5)}
+}
+#lock.ready .lock-clock,
+#lock.ready .lock-date{display:none}
+#lock.ready .lock-open{display:inline-block}
+
+/* floating hearts / sparkles in the background */
+.lock-float{
+ position:absolute;bottom:-30px;z-index:1;font-style:normal;line-height:1;
+ pointer-events:none;opacity:0;will-change:transform,opacity;
+ animation:lockUp var(--t) linear var(--d) infinite;
+}
+@keyframes lockUp{
+ 0%{transform:translate(0,0) scale(.7);opacity:0}
+ 12%{opacity:.8}
+ 85%{opacity:.5}
+ 100%{transform:translate(var(--dx),-108vh) scale(1);opacity:0}
+}
+
+@media (prefers-reduced-motion:reduce){
+ #lock::before,.lock-gift,.lock-open,.lock-float{animation:none}
+ .lock-float{opacity:.35}
+}

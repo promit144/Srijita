@@ -1,0 +1,124 @@
+/* =====================================================================
+   OUT OF THIS WORLD  —  the space page (loaded after enhance.css)
+   Warp jump -> spinning galaxy -> find the star named after her
+   ===================================================================== */
+
+.cosmos-screen{
+ background:
+  radial-gradient(ellipse at 18% 88%,rgba(255,90,160,.22),transparent 55%),
+  radial-gradient(ellipse at 88% 16%,rgba(110,90,255,.28),transparent 55%),
+  radial-gradient(ellipse at 55% 55%,rgba(30,160,200,.10),transparent 62%),
+  linear-gradient(180deg,#05030f,#0d0620 55%,#16082a);
+ padding:0;
+}
+.cosmos-screen::after{display:none}
+
+.cosmos-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+
+/* ---------- headline ---------- */
+.cosmos-text{
+ position:absolute;left:0;right:0;top:max(5.5vh,30px);z-index:3;
+ padding:0 22px;text-align:center;pointer-events:none;
+}
+.cosmos-text .eyebrow{margin:0 0 8px}
+.cosmos-text h2{
+ margin:0 0 10px;font-family:"Playfair Display",serif;font-weight:600;
+ font-size:clamp(28px,8.4vw,42px);line-height:1.1;color:#fff1e7;
+}
+.cosmos-text h2 em{color:#ffc044;font-style:italic}
+.cosmos-sub{margin:0;font-size:14px;line-height:1.65;color:#d9c6ee}
+
+.cosmos-screen:not(.go) .cosmos-text > *{opacity:0}
+.cosmos-screen.go .cosmos-text > *{
+ animation:txFadeUp 1s cubic-bezier(.2,.8,.25,1) calc(2.1s + var(--k,0) * .28s) both;
+}
+.cosmos-text > :nth-child(1){--k:0}
+.cosmos-text > :nth-child(2){--k:1}
+.cosmos-text > :nth-child(3){--k:2}
+.cosmos-screen.go .cosmos-sub.swap{animation:cosSwap .6s ease both}
+@keyframes cosSwap{0%{opacity:1}40%{opacity:0}100%{opacity:1}}
+
+/* ---------- her star ---------- */
+.her-star{
+ position:absolute;left:var(--hx,79%);top:var(--hy,35%);z-index:5;
+ width:76px;height:76px;margin:-38px 0 0 -38px;padding:0;background:none;
+ opacity:0;pointer-events:none;-webkit-tap-highlight-color:transparent;
+ transition:opacity 1.4s ease,left 1.2s cubic-bezier(.5,0,.2,1),top 1.2s cubic-bezier(.5,0,.2,1);
+}
+.cosmos-screen.star-on .her-star{opacity:1;pointer-events:auto}
+.cosmos-screen.found .her-star{pointer-events:none}
+
+.her-core{
+ position:absolute;left:50%;top:50%;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;
+ background:#fff7d6;
+ box-shadow:0 0 10px 3px rgba(255,217,138,.95),0 0 30px 10px rgba(255,150,190,.5);
+ animation:herPulse 2.2s ease-in-out infinite;will-change:transform,opacity;
+}
+.her-core::before,.her-core::after{
+ content:"";position:absolute;left:50%;top:50%;border-radius:2px;
+ background:linear-gradient(90deg,transparent,rgba(255,244,214,.95),transparent);
+}
+.her-core::before{width:44px;height:2px;margin:-1px 0 0 -22px}
+.her-core::after{width:2px;height:44px;margin:-22px 0 0 -1px;
+ background:linear-gradient(180deg,transparent,rgba(255,244,214,.95),transparent)}
+@keyframes herPulse{
+ 0%,100%{transform:scale(.85);opacity:.85}
+ 50%{transform:scale(1.3);opacity:1}
+}
+.her-ring{
+ position:absolute;left:50%;top:50%;width:76px;height:76px;margin:-38px 0 0 -38px;border-radius:50%;
+ border:1px solid rgba(255,230,170,.7);opacity:0;
+ animation:herRing 3s ease-out infinite;
+}
+.her-ring.r2{animation-delay:1.5s}
+@keyframes herRing{0%{transform:scale(.25);opacity:.8}100%{transform:scale(1.15);opacity:0}}
+.cosmos-screen.found .her-ring{display:none}
+.cosmos-screen.found .her-core{animation-duration:3.4s}
+.her-star.nudge .her-core{animation-duration:1.1s}
+
+/* ---------- the constellation ---------- */
+.constellation{
+ position:absolute;left:50%;top:var(--cy,50%);z-index:4;
+ width:var(--cs,300px);height:var(--cs,300px);transform:translate(-50%,-50%);
+ pointer-events:none;overflow:visible;
+}
+.c-fill{fill:rgba(255,120,180,.10);opacity:0;transition:opacity 1.6s ease}
+.filled .c-fill{opacity:1}
+.c-line{
+ fill:none;stroke:rgba(255,214,235,.85);stroke-width:.45;stroke-linecap:round;
+ stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .45s ease;
+}
+.c-line.on{stroke-dashoffset:0}
+.c-node{opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(0);
+ transition:opacity .4s ease,transform .5s cubic-bezier(.3,1.6,.5,1)}
+.c-node.on{opacity:1;transform:scale(1)}
+.c-halo{fill:rgba(255,190,220,.28)}
+.c-dot{fill:#fff}
+.c-tiny{fill:rgba(255,240,220,.9)}
+.twinkle .c-node{animation:nodeTw 2.6s ease-in-out var(--tw,0s) infinite}
+@keyframes nodeTw{0%,100%{opacity:1}50%{opacity:.45}}
+
+/* ---------- name tag + hint ---------- */
+.star-tag{
+ position:absolute;left:0;right:0;bottom:104px;z-index:3;text-align:center;pointer-events:none;
+ opacity:0;transform:translateY(14px);transition:opacity 1.2s ease,transform 1.2s ease;
+}
+.star-tag.show{opacity:1;transform:none}
+.st-label{display:block;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#f2a4ba}
+.st-name{
+ display:block;margin:4px 0 2px;font-family:"Playfair Display",serif;font-weight:700;
+ font-size:clamp(30px,9vw,40px);color:#fff1e7;text-shadow:0 0 18px rgba(255,150,190,.55);
+}
+.st-note{display:block;font-size:13px;font-style:italic;color:#d9c6ee}
+
+.cosmos-hint{
+ position:absolute;left:0;right:0;bottom:56px;z-index:3;margin:0;text-align:center;
+ font-size:13px;font-style:italic;letter-spacing:.04em;color:#f2a4ba;
+ opacity:0;transition:opacity 1s ease;pointer-events:none;
+}
+.cosmos-screen.hint-on .cosmos-hint{opacity:.9}
+
+@media (prefers-reduced-motion:reduce){
+ .her-core,.her-ring,.twinkle .c-node{animation:none}
+ .her-ring{display:none}
+}

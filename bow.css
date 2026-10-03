@@ -1,0 +1,61 @@
+/* =====================================================================
+   OPENING: PULL THE BOW  (loaded after style.css)
+   ===================================================================== */
+
+.hero{touch-action:none;-webkit-user-select:none;user-select:none}
+.hero .heart{cursor:default}
+
+/* cue: sits on the bow, the finger slides back along the aim axis */
+.pull-cue{
+ position:absolute;left:0;top:0;width:0;height:0;
+ transform:translate(var(--bx,0px),var(--by,0px)) rotate(var(--ang,0rad));
+ opacity:0;transition:opacity .6s ease;pointer-events:none;
+}
+.hero.ready .pull-cue{opacity:1}
+.hero.aiming .pull-cue,.hero:not(.go) .pull-cue{opacity:0}
+
+.pc-ring{
+ position:absolute;left:-2px;top:0;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;
+ border:2px solid rgba(236,50,112,.55);
+ animation:pcRing 1.9s ease-out infinite;
+}
+@keyframes pcRing{0%{transform:scale(.45);opacity:.9}100%{transform:scale(1.35);opacity:0}}
+
+.pc-track{
+ position:absolute;left:0;top:0;width:0;height:0;
+ animation:pcSlide 1.9s cubic-bezier(.5,0,.3,1) infinite;
+}
+.pc-dot{
+ position:absolute;left:-14px;top:-14px;width:28px;height:28px;border-radius:50%;
+ background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.95),rgba(255,170,205,.75) 60%,rgba(236,50,112,.55));
+ border:2px solid rgba(255,255,255,.9);
+ box-shadow:0 0 0 6px rgba(236,50,112,.14),0 6px 14px rgba(150,30,80,.3);
+}
+@keyframes pcSlide{
+ 0%,12%{transform:translateX(0);opacity:0}
+ 22%{opacity:1}
+ 70%,82%{transform:translateX(-44px);opacity:1}
+ 100%{transform:translateX(-44px);opacity:0}
+}
+
+/* hint line */
+.hero .hint{bottom:5%;font-size:13px;letter-spacing:.06em;text-align:center;padding:0 24px}
+
+/* the heart "feels" the draw: glow + tension grow with how far the string is back */
+.hero.grabbed .soft-orb{transform:translateY(46px) scale(calc(1.1 + var(--draw,0) * .25))}
+.hero.drawn .heart-core{filter:drop-shadow(0 0 calc(10px + var(--draw,0) * 18px) rgba(236,50,112,.7))}
+.hero.drawn .aim-line{filter:drop-shadow(0 0 4px rgba(236,50,112,.6))}
+
+/* pressed away from the bow: little shake of the hint + a stronger cue */
+.hero.nudge .hint{animation:hintShake .5s ease both}
+@keyframes hintShake{
+ 0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}
+ 60%{transform:translateX(-4px)}80%{transform:translateX(3px)}
+}
+.hero.nudge .pc-ring{border-width:3px;border-color:rgba(236,50,112,.9)}
+
+@media (prefers-reduced-motion:reduce){
+ .pc-ring,.pc-track{animation:none}
+ .pc-track{transform:translateX(-22px)}
+ .hero.nudge .hint{animation:none}
+}

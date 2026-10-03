@@ -1,0 +1,29 @@
+/* ===== journey progress bar (top of the screen) ===== */
+#journey{
+ position:fixed;z-index:50;pointer-events:none;
+ left:18px;right:18px;top:calc(env(safe-area-inset-top,0px) + 3px);
+ height:3px;border-radius:99px;
+ background:rgba(255,255,255,.16);
+ transition:opacity .6s ease,background .6s ease;
+}
+#journey.light{background:rgba(83,42,61,.14)}
+#journey.hide{opacity:0}
+
+.jr-fill{
+ position:absolute;left:0;top:0;bottom:0;width:100%;border-radius:inherit;
+ background:linear-gradient(90deg,#ff5d91,#ff9abb 55%,#ffc044);
+ transform-origin:0 50%;transform:scaleX(var(--p,0));
+ transition:transform 1.1s cubic-bezier(.65,0,.25,1);
+ box-shadow:0 0 8px rgba(255,93,145,.55);
+}
+.jr-head{
+ position:absolute;top:50%;left:calc(var(--p,0) * 100%);width:9px;height:9px;margin:-4.5px 0 0 -4.5px;
+ border-radius:50%;background:#fff;
+ box-shadow:0 0 0 3px rgba(255,93,145,.35),0 0 10px 2px rgba(255,170,200,.8);
+ transition:left 1.1s cubic-bezier(.65,0,.25,1);
+}
+.jr-ticks{position:absolute;inset:0;display:flex;justify-content:space-between}
+.jr-ticks i{width:2px;height:100%;background:rgba(0,0,0,.18);border-radius:2px}
+.jr-ticks i:first-child,.jr-ticks i:last-child{background:transparent}
+
+@media (prefers-reduced-motion:reduce){.jr-fill,.jr-head{transition:none}}
