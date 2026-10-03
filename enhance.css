@@ -1,0 +1,106 @@
+/* ===== extra magic (loaded after style.css) ===== */
+.fx-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.birthday-card,.final-card,.tree-wrap{position:relative;z-index:2}
+.tree{position:relative}
+
+/* birthday: spinning light rays */
+.bd-rays{position:absolute;left:50%;top:42%;width:230vmax;height:230vmax;margin:-115vmax 0 0 -115vmax;pointer-events:none;
+ background:repeating-conic-gradient(rgba(255,192,68,.11) 0 6deg,transparent 6deg 16deg);
+ -webkit-mask:radial-gradient(circle,#000 0,transparent 42%);mask:radial-gradient(circle,#000 0,transparent 42%);
+ animation:bdSpin 70s linear infinite}
+@keyframes bdSpin{to{transform:rotate(360deg)}}
+
+/* tree: sways, breathes, glows */
+.tree-branches,.tree-heart-field{transform-origin:50% 100%;animation:treeSway 7s ease-in-out infinite}
+@keyframes treeSway{0%,100%{transform:rotate(-.8deg)}50%{transform:rotate(.8deg)}}
+.tree-aura{position:absolute;left:50%;top:32%;width:95%;aspect-ratio:1;transform:translate(-50%,-50%);pointer-events:none;
+ background:radial-gradient(circle,rgba(255,120,180,.32),rgba(255,120,180,.09) 45%,transparent 68%);animation:aura 4s ease-in-out infinite}
+@keyframes aura{50%{opacity:.55;transform:translate(-50%,-50%) scale(1.12)}}
+.tree-ground{position:absolute;left:50%;bottom:-4%;width:70%;height:10%;transform:translateX(-50%);pointer-events:none;
+ background:radial-gradient(ellipse,rgba(255,150,200,.35),transparent 70%)}
+
+/* final: shimmering name + glowing button */
+.final-screen .final-card h1 em{background:linear-gradient(100deg,#d4226a 25%,#ff9a3c 42%,#fff 50%,#ff9a3c 58%,#d4226a 75%);
+ background-size:250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:shim 3.5s linear infinite}
+@keyframes shim{to{background-position:-250% 0}}
+#replay{animation:btnGlow 2.4s ease-in-out infinite}
+@keyframes btnGlow{50%{box-shadow:0 0 0 8px rgba(236,50,112,.14),0 10px 34px rgba(236,50,112,.45)}}
+
+
+/* ===== canvas layers fade in once they start drawing ===== */
+.fx-canvas{opacity:0;transition:opacity .9s ease}
+.fx-canvas.live{opacity:1}
+
+
+/* ===== page 2: picture instead of the emoji ===== */
+.cat{font-size:0;line-height:0;filter:none;display:flex;justify-content:center}
+.cat-img{
+ display:block;
+ width:clamp(112px,34vw,150px);
+ aspect-ratio:1;height:auto;
+ object-fit:cover;
+ border-radius:50%;
+ background:#f3e9e3;
+ border:4px solid rgba(255,232,240,.92);
+ box-shadow:
+  0 0 0 6px rgba(236,50,112,.28),
+  0 14px 30px rgba(0,0,0,.35),
+  0 0 38px rgba(255,120,180,.35);
+ user-select:none;-webkit-user-drag:none;
+}
+
+
+/* =====================================================================
+   PHONE / LOW-POWER MODE  (html.lite is set from script.js)
+   Same look, but only things the GPU can animate cheaply
+   (opacity + transform). No animated blur / drop-shadow / box-shadow.
+   ===================================================================== */
+
+/* tree: glow is painted once, only opacity + transform animate */
+.lite .tree-heart{
+ text-shadow:0 0 5px rgba(255,130,180,.95),0 0 12px rgba(255,70,145,.6);
+ will-change:transform,opacity;
+ animation:heartTwinkleLite var(--twinkle) ease-in-out infinite,heartFloatLite var(--float) ease-in-out infinite;
+ animation-delay:var(--delay);
+}
+.lite .tree-heart:nth-child(3n){display:none}      /* fewer layers on small screens */
+@keyframes heartTwinkleLite{
+ 0%,100%{opacity:.6}
+ 42%{opacity:1}
+ 58%{opacity:.78}
+ 76%{opacity:1}
+}
+@keyframes heartFloatLite{
+ 0%,100%{transform:translateY(0) scale(1) rotate(-2deg)}
+ 50%{transform:translateY(-4px) scale(1.055) rotate(2deg)}
+}
+.lite .branch-lines{animation:none}                 /* SVG sway repaints every frame */
+.lite .tree-branches,.lite .tree-heart-field{will-change:transform}
+
+/* birthday: huge spinning masked layer is too heavy for phones */
+.lite .bd-rays{animation:none}
+
+/* final page: no animated text fill / text-shadow / box-shadow */
+.lite .final-screen .final-card h1 em{
+ background:none;animation:none;
+ -webkit-text-fill-color:#d32769;color:#d32769;
+}
+.lite .final-screen.go .final-card h1{
+ animation-name:txFadeUp;animation-duration:.95s;animation-delay:.5s;
+ animation-iteration-count:1;animation-timing-function:cubic-bezier(.2,.8,.25,1);
+ animation-fill-mode:both;
+}
+.lite #replay{animation:btnPulse 2.4s ease-in-out infinite}
+@keyframes btnPulse{50%{transform:scale(1.045)}}
+
+/* transition light bar: smaller shadow */
+.lite .tx-hbar{box-shadow:0 0 22px 6px rgba(255,190,110,.6)}
+
+/* things that blur whatever is behind/under them while pages animate */
+.lite .music-pill{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(38,13,35,.9)}
+.lite .reason-card{-webkit-backdrop-filter:none;backdrop-filter:none}
+.lite .aurora i{filter:blur(34px)}
+
+@media (prefers-reduced-motion:reduce){
+ .bd-rays,.tree-branches,.tree-heart-field,.tree-aura,#replay{animation:none}
+}

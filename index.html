@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <meta name="theme-color" content="#2b102d">
+
+  <title>For Srijita ♡</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap"
+    rel="stylesheet">
+
+  <link rel="preload" as="image" href="assets/cutie.jpg">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="enhance.css">
+</head>
+
+<body>
+
+  <!-- MUSIC -->
+  <div class="music-pill" id="musicPill">
+
+    <button id="musicBtn">
+      ♫
+    </button>
+
+    <div>
+      <strong>Blue</strong>
+      <span>tap for music</span>
+    </div>
+
+  </div>
+
+  <!-- IMPORTANT:
+       Put your song at:
+       assets/blue.mp3
+  -->
+
+  <audio id="song" src="assets/blue.mp3" loop preload="auto">
+  </audio>
+
+
+  <main id="app">
+
+
+    <!-- =========================================
+         SCREEN 1
+         ========================================= -->
+
+    <section class="screen hero active">
+
+      <div class="soft-orb"></div>
+
+      <p class="eyebrow">
+        a little something, for you
+      </p>
+
+      <!-- BOW + ARROW OPENING ANIMATION -->
+      <div class="archery-scene" aria-hidden="true">
+
+        <!-- dotted aim guide (fades in while the bow is drawn) -->
+        <div class="aim-line" id="aimLine"></div>
+
+        <!-- bow: drawn in JS so the limbs flex and the string bends -->
+        <div class="bow" id="openingBow">
+          <svg width="1" height="1">
+            <path class="bow-limb" id="bowLimb" d="M-2 -62 C22 -40 22 40 -2 62" />
+            <rect class="bow-grip" id="bowGrip" x="11" y="-10" width="10" height="20" rx="3.5" />
+            <path class="bow-string" id="bowString" d="M-2 -62 L-2 0 L-2 62" />
+          </svg>
+        </div>
+
+        <!-- cupid arrow: pink feathers, gold heart-tip -->
+        <div class="arrow" id="openingArrow">
+          <svg width="1" height="1">
+            <defs>
+              <linearGradient id="trailGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#ff7fa8" stop-opacity="0" />
+                <stop offset="1" stop-color="#ff7fa8" stop-opacity=".9" />
+              </linearGradient>
+            </defs>
+            <rect id="arrowTrail" x="-96" y="-1.5" width="96" height="3" rx="1.5" fill="url(#trailGrad)" opacity="0" />
+            <line x1="3" y1="0" x2="92" y2="0" stroke="#7a4a28" stroke-width="2.6" stroke-linecap="round" />
+            <path d="M1 0 L12 -9 L27 -9 L19 0 Z" fill="#ec3270" />
+            <path d="M1 0 L12 9 L27 9 L19 0 Z" fill="#ff7fa8" />
+            <path d="M83 0 C81 -6 77 -9 70 -10 C73 -6 75 -3 77 0 Z" fill="#fff3e7" />
+            <path d="M83 0 C81 6 77 9 70 10 C73 6 75 3 77 0 Z" fill="#fff3e7" />
+            <path d="M89 -6 L106 0 L89 6 L93 0 Z" fill="#f0a72c" />
+          </svg>
+        </div>
+      </div>
+
+      <div class="heart" id="openingHeart">
+        <span class="heart-core">
+          <svg viewBox="0 0 100 92" aria-hidden="true">
+            <defs>
+              <linearGradient id="heartFill" x1="10%" y1="0%" x2="88%" y2="100%">
+                <stop offset="0" stop-color="#ff8dbb" />
+                <stop offset=".5" stop-color="#f23d82" />
+                <stop offset="1" stop-color="#c9124f" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M50 90 C18 66 2 47 2 28 C2 12 14 2 28 2 C38 2 46 8 50 16 C54 8 62 2 72 2 C86 2 98 12 98 28 C98 47 82 66 50 90 Z"
+              fill="url(#heartFill)" />
+            <ellipse cx="27" cy="26" rx="9" ry="5.6" fill="#fff" opacity=".78" transform="rotate(-14 27 26)" />
+          </svg>
+        </span>
+        <span class="heart-burst" aria-hidden="true"></span>
+      </div>
+
+      <div class="impact-particles" id="impactParticles" aria-hidden="true"></div>
+
+      <p class="hint">
+        tap the heart
+      </p>
+
+    </section>
+
+
+
+    <!-- =========================================
+         SCREEN 2
+         ========================================= -->
+
+    <section class="screen birthday">
+
+      <div class="birthday-card">
+
+        <p class="mini">
+          today feels a little more special
+        </p>
+
+        <h1>
+          Happy<br>
+          Birthday
+        </h1>
+
+        <div class="name">
+          Srijita!
+        </div>
+
+        <div class="cat">
+          <img class="cat-img" src="assets/cutie.jpg" width="220" height="220" alt="" decoding="async"
+            draggable="false">
+        </div>
+
+        <p class="tiny">
+          someone very special was born today ♡
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         SCREEN 3
+         ========================================= -->
+
+    <section class="screen letter-screen">
+
+      <div class="letter-glow" aria-hidden="true"></div>
+
+      <!-- ENVELOPE: back -> flap(open) -> letter -> front pocket -> flap(closed) -->
+      <div class="env-stage" id="envelopeStage" role="button" tabindex="0" aria-label="Open the letter">
+
+        <svg class="env-part env-back" viewBox="0 0 300 200" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="envBackGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#c9718c" />
+              <stop offset="1" stop-color="#b05b78" />
+            </linearGradient>
+          </defs>
+          <rect width="300" height="200" fill="url(#envBackGrad)" />
+        </svg>
+
+        <div class="env-flap" aria-hidden="true">
+          <svg class="flap-face flap-out" viewBox="0 0 300 112" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="flapOutGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#f7c0cf" />
+                <stop offset="1" stop-color="#ea96ae" />
+              </linearGradient>
+            </defs>
+            <polygon points="0,0 300,0 150,112" fill="url(#flapOutGrad)" stroke="rgba(255,255,255,.4)"
+              stroke-width="1.2" stroke-linejoin="round" />
+          </svg>
+          <svg class="flap-face flap-in" viewBox="0 0 300 112" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="flapInGrad" x1="0" y1="1" x2="0" y2="0">
+                <stop offset="0" stop-color="#e48aa4" />
+                <stop offset="1" stop-color="#cc6d8b" />
+              </linearGradient>
+            </defs>
+            <polygon points="0,0 300,0 150,112" fill="url(#flapInGrad)" />
+          </svg>
+          <span class="env-seal">♥</span>
+        </div>
+
+        <article class="letter">
+
+          <h2>
+            Dear Srijita,
+          </h2>
+
+          <p>
+            I keep thinking about how lucky I got with you.
+
+            You’ve brought so much warmth and happiness into my life, and I probably don’t say thank you nearly enough
+            for that.
+
+            I’m genuinely grateful for you, for the little moments we share, and for having you by my side. ♡
+          </p>
+
+          <p>
+            This year, I hope life is gentle with you.
+            I hope you get the little things you've been
+            wishing for, the moments that make you smile
+            without trying, and all the happiness you deserve.
+          </p>
+
+          <p>
+            We've only known each other a short while,
+            but you've already made my days brighter.
+            I'm really glad our paths crossed, and
+            <strong>
+              I'm looking forward to every good moment still to come.
+            </strong>
+          </p>
+
+          <p class="closing">
+            Happy birthday, Srijita… 🎂
+          </p>
+
+          <div class="signature">
+            With warm wishes,<br>
+            <b>— A well-wisher</b>
+          </div>
+
+        </article>
+
+        <svg class="env-part env-front" viewBox="0 0 300 200" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="envLeftGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#f3b7c8" />
+              <stop offset="1" stop-color="#e58fa9" />
+            </linearGradient>
+            <linearGradient id="envRightGrad" x1="1" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#eda3b8" />
+              <stop offset="1" stop-color="#dd839f" />
+            </linearGradient>
+            <linearGradient id="envBottomGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f8c9d6" />
+              <stop offset="1" stop-color="#ee9fb6" />
+            </linearGradient>
+          </defs>
+          <polygon points="0,0 150,108 0,200" fill="url(#envLeftGrad)" />
+          <polygon points="300,0 150,108 300,200" fill="url(#envRightGrad)" />
+          <polygon points="0,200 150,108 300,200" fill="url(#envBottomGrad)" />
+          <path d="M0 0 L150 108 L300 0 M0 200 L150 108 L300 200" fill="none" stroke="rgba(255,255,255,.35)"
+            stroke-width="1.2" />
+        </svg>
+
+        <div class="letter-fx" id="letterFx" aria-hidden="true"></div>
+
+      </div>
+
+      <p class="env-hint">tap the envelope to open ♡</p>
+
+    </section>
+
+
+
+    <!-- =========================================
+         SCREEN 4
+         ========================================= -->
+
+    <section class="screen reasons-screen">
+
+      <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="dust" id="reasonDust" aria-hidden="true"></div>
+
+      <div class="content">
+
+        <p class="eyebrow">
+          a few little reasons ♡
+        </p>
+
+        <h2>
+          Why you're loved
+        </h2>
+
+        <p class="sub" id="reasonSub">
+          Pop every balloon. I have something to tell you.
+        </p>
+
+      </div>
+
+
+      <!-- the sky: five floating balloons -->
+      <div class="sky" id="sky">
+
+        <button class="bl"
+          style="--x:12%;--y:30%;--k:0;--dx:9px;--amp:15px;--dur:5.6s;--delay:-1.2s;--c1:#ffb3ca;--c2:#e9518c;--glow:rgba(255,93,145,.55)"
+          data-text="You make ordinary days feel special" aria-label="Pop the pink balloon">
+          <span class="bl-float">
+            <span class="bl-body"><i class="bl-heart">♡</i></span>
+            <i class="bl-knot"></i><i class="bl-string"></i>
+          </span>
+        </button>
+
+        <button class="bl"
+          style="--x:31%;--y:2%;--k:1;--dx:-10px;--amp:18px;--dur:6.4s;--delay:-3.1s;--c1:#ffe18a;--c2:#eebd39;--glow:rgba(255,200,70,.5)"
+          data-text="You believed in me when I didn't" aria-label="Pop the yellow balloon">
+          <span class="bl-float">
+            <span class="bl-body"><i class="bl-heart">♡</i></span>
+            <i class="bl-knot"></i><i class="bl-string"></i>
+          </span>
+        </button>
+
+        <button class="bl"
+          style="--x:50%;--y:34%;--k:2;--dx:8px;--amp:14px;--dur:5.1s;--delay:-.4s;--c1:#cdb9ff;--c2:#8366dc;--glow:rgba(150,115,255,.55)"
+          data-text="My worst days get shorter when you call" aria-label="Pop the purple balloon">
+          <span class="bl-float">
+            <span class="bl-body"><i class="bl-heart">♡</i></span>
+            <i class="bl-knot"></i><i class="bl-string"></i>
+          </span>
+        </button>
+
+        <button class="bl"
+          style="--x:69%;--y:0%;--k:3;--dx:-8px;--amp:17px;--dur:6.8s;--delay:-2.2s;--c1:#8ff0e8;--c2:#27aaa9;--glow:rgba(60,220,210,.5)"
+          data-text="Your laugh is still my favourite sound" aria-label="Pop the teal balloon">
+          <span class="bl-float">
+            <span class="bl-body"><i class="bl-heart">♡</i></span>
+            <i class="bl-knot"></i><i class="bl-string"></i>
+          </span>
+        </button>
+
+        <button class="bl"
+          style="--x:88%;--y:26%;--k:4;--dx:10px;--amp:15px;--dur:5.9s;--delay:-4s;--c1:#ffc5ae;--c2:#ef6d50;--glow:rgba(255,130,95,.55)"
+          data-text="The world feels a little kinder with you in it" aria-label="Pop the peach balloon">
+          <span class="bl-float">
+            <span class="bl-body"><i class="bl-heart">♡</i></span>
+            <i class="bl-knot"></i><i class="bl-string"></i>
+          </span>
+        </button>
+
+      </div>
+
+
+      <!-- the message card appears here -->
+      <div class="reason-stage" id="reasonStage" aria-live="polite"></div>
+
+      <!-- five hearts light up as you collect the reasons -->
+      <div class="progress" aria-hidden="true">
+        <i class="pip" style="--n:0">♡</i>
+        <i class="pip" style="--n:1">♡</i>
+        <i class="pip" style="--n:2">♡</i>
+        <i class="pip" style="--n:3">♡</i>
+        <i class="pip" style="--n:4">♡</i>
+      </div>
+
+      <!-- pop effects are drawn here -->
+      <div class="reason-fx" id="reasonFx" aria-hidden="true"></div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         SCREEN 5
+         ========================================= -->
+
+    <section class="screen cake-screen">
+
+      <div class="cake-wrap">
+
+        <p class="eyebrow">
+          first things first 🎂
+        </p>
+
+        <h2>
+          Make a wish.
+        </h2>
+
+        <p class="sub" id="cakeSub">
+          Press the cake to light the candles.
+        </p>
+
+
+        <button id="cake" class="cake" aria-label="Light the birthday cake">
+
+          <div class="flame f1"></div>
+          <div class="flame f2"></div>
+          <div class="flame f3"></div>
+
+          <div class="candle c1"></div>
+          <div class="candle c2"></div>
+          <div class="candle c3"></div>
+
+          <div class="icing"></div>
+
+          <div class="tier top"></div>
+          <div class="tier bottom"></div>
+
+        </button>
+
+
+        <p id="cakeMessage" class="cake-message">
+
+          A wish this beautiful deserves to come true.
+
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         SCREEN 6
+         ========================================= -->
+
+    <section class="screen tree-screen">
+
+      <div class="tree-wrap">
+
+        <p class="eyebrow">
+          one more little thing
+        </p>
+
+        <h2>
+          A tree full of wishes
+        </h2>
+
+
+        <div class="tree">
+          <svg class="tree-branches" viewBox="0 0 760 500" aria-hidden="true">
+            <g class="branch-lines">
+              <!-- main trunk -->
+              <path class="main-branch" d="M380 492 C378 420 380 350 380 285 C380 225 378 175 374 125" />
+
+              <!-- left main branches -->
+              <path d="M380 315 C340 280 292 246 238 218 C195 196 150 176 105 151" />
+              <path d="M380 350 C325 327 266 319 208 322 C160 324 116 312 76 286" />
+              <path d="M377 270 C335 232 302 187 286 137 C276 105 267 78 250 52" />
+              <path d="M376 220 C335 180 318 140 315 94 C313 72 309 52 302 34" />
+
+              <!-- right main branches -->
+              <path d="M380 310 C425 275 478 241 536 214 C586 191 638 169 690 130" />
+              <path d="M380 348 C436 326 498 318 558 324 C616 330 671 318 715 287" />
+              <path d="M383 267 C426 230 463 188 481 140 C492 111 501 82 522 52" />
+              <path d="M384 220 C427 181 457 139 466 94 C471 70 481 51 493 33" />
+
+              <!-- secondary branches -->
+              <path d="M315 246 C278 224 241 210 199 208 C168 207 142 197 121 180" />
+              <path d="M445 247 C487 224 522 213 560 210 C590 208 615 197 635 179" />
+              <path d="M292 185 C263 164 238 143 220 116 C205 95 194 75 187 55" />
+              <path d="M468 185 C500 161 529 142 558 119 C578 103 592 85 603 63" />
+              <path d="M272 305 C233 286 194 276 153 279 C123 281 98 272 79 257" />
+              <path d="M488 305 C529 285 570 277 612 280 C644 283 670 274 690 256" />
+            </g>
+          </svg>
+
+          <div class="tree-heart-field" aria-hidden="true"></div>
+        </div>
+
+        <p class="tree-text">
+
+          May this year bring you<br>
+
+          <b>
+            more reasons to smile than you can count.
+          </b>
+
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         SCREEN 7
+         ========================================= -->
+
+    <section class="screen final-screen">
+
+      <div class="final-card">
+
+        <p class="eyebrow">
+          and just like that…
+        </p>
+
+
+        <h1>
+
+          Happy Birthday,<br>
+
+          <em>
+            Srijita
+          </em>
+
+          ♡
+
+        </h1>
+
+
+        <p>
+          27 looks beautiful on you.
+        </p>
+
+
+        <div class="divider">
+          ✦
+        </div>
+
+
+        <p class="big-line">
+
+          Here's to another year of<br>
+
+          <b>
+            you being you.
+          </b>
+
+        </p>
+
+
+        <button id="replay">
+
+          Replay from the beginning ↻
+
+        </button>
+
+      </div>
+
+
+      <div class="floating-hearts"></div>
+
+    </section>
+
+  </main>
+
+
+  <!--
+       Bottom navigation is intentionally hidden.
+       Navigation happens by tapping the screen.
+  -->
+
+
+  <script src="script.js"></script>
+  <script src="enhance.js"></script>
+
+</body>
+
+</html>
