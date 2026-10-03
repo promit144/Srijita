@@ -7,7 +7,7 @@
 (function () {
   "use strict";
 
-  const UNLOCK_AT = new Date("2026-10-03T00:00:00+05:30").getTime();
+  const UNLOCK_AT = new Date("2026-10-06T00:00:00+05:30").getTime();
 
   const lock = document.getElementById("lock");
   if (!lock) return;
