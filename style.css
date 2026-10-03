@@ -1275,6 +1275,7 @@ button {
   .tree {
 
     transform:
+      translateX(-50%)
       scale(.8);
 
     margin:
